@@ -25,9 +25,10 @@ jobs:
       # 'uses:' pour utiliser une action disponible sur github marketplace
       # NOTE choisir entre 'uses:' ou 'run:'. Impossible d'utiliser les deux au sein d'une meme étap
       - name: "Run docker image"
-        run: docker run atelier1
+        run: docker run atelier1 -d
       - name: "Test http connection"
         run: |
+          sleep 20 
           curl localhost:8080
           if [ $? -eq 0 ]; then
             echo "Connection successful"
@@ -35,5 +36,5 @@ jobs:
           fi
           echo "Connection failed"
           exit 1
-          
+
           
