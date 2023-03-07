@@ -19,7 +19,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${DOCKER_LOGIN}
-          password: ${secrets.DOCKER_HUB_PASSWORD}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       # Une fois votre répertoire récupérer, vous pouvez effectuer un `ls -l` pour
       # lister et verifier que votre repository github est bien téléchargé
       - name: Build and push
