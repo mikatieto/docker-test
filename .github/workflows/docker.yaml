@@ -1,11 +1,11 @@
-name: Exemple de workflow pour atl0 # Le nom de la chaine CI/CD (workflow)
+name: Workflow atelier 1 # Le nom de la chaine CI/CD (workflow)
 # Controle de la chaine CI/CD
 on:
   # Lance la chaine CI/CD lorsque un `git push` est effectué sur les branches indiquées
   push:
 jobs:
   # Chaque tache (job) est représentée par un serveur, ce qui permet l'indépendance des étapes a executer.
-  build-test-deploy: # L'identifiant du job
+  build-test-upload: # L'identifiant du job
     runs-on: ubuntu-latest # Choix de l'OS du job
     steps: # Sections des étapes à effectuer au sein du job
       # actions/checkout@v3 permet de télécharger votre repository github au sein du job
@@ -18,10 +18,7 @@ jobs:
       # lister et verifier que votre repository github est bien téléchargé
       - name: "[DEBUG] Lister l'arborescence de fichiers sur le serveur"
         run: | # le | permet d'ecrire plusieurs ligne de code shell au sein d'une meme etape 
-          echo "[INFO] Current directory"
-          pwd 
-          echo "[INFO] List my files"
-          ls -l . 
+          docker build . 
       # Vous pouvez écrire autant d'étapes nécessaire en déclarant à minima les directives
       # 'name:' pour nommer votre étape
       # 'run:' pour lancer une ligne de commande Shell
