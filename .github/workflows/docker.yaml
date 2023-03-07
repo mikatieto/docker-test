@@ -16,11 +16,24 @@ jobs:
 
       # Une fois votre répertoire récupérer, vous pouvez effectuer un `ls -l` pour
       # lister et verifier que votre repository github est bien téléchargé
-      - name: "[DEBUG] Lister l'arborescence de fichiers sur le serveur"
+      - name: "Build docker image"
         run: | # le | permet d'ecrire plusieurs ligne de code shell au sein d'une meme etape 
-          docker build . 
+          docker build . -t"atelier1:latest" 
       # Vous pouvez écrire autant d'étapes nécessaire en déclarant à minima les directives
       # 'name:' pour nommer votre étape
       # 'run:' pour lancer une ligne de commande Shell
       # 'uses:' pour utiliser une action disponible sur github marketplace
       # NOTE choisir entre 'uses:' ou 'run:'. Impossible d'utiliser les deux au sein d'une meme étap
+      - name: "Run docker image"
+        run: docker run atelier1
+      - name: "Test http connection"
+        run: |
+          curl localhost:8080
+          if [ $? -eq 0 ]; then
+            echo "Connection successful"
+            exit 0
+          fi
+          echo "Connection failed"
+          exit 1
+          
+          
